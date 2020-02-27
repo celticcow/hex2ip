@@ -1,0 +1,43 @@
+192.168.0.1
+
+0xC0A80001
+b'\xC0\xA8\x00\x01'
+
+
+C0A80001
+92120289
+
+\x92\x12\x02\x89
+
+ipaddress.IPv4Address(b'\x92\x12\x02\x89')
+IPv4Address('146.18.2.137')
+
+
+0x00000000   = 0.0.0.0
+
+0xFFFFFFFF   = 255.255.255.255
+
+ipaddress.IPv4Address(b'00000000')
+
+>>> import struct
+>>> 
+>>> addr_long = int("92120289",16)
+>>> hex(addr_long)
+'0x92120289'
+>>> struct.pack("<L", addr_long)
+b'\x89\x02\x12\x92'
+
+
+
+
+>>> ip_addr = "92120289"
+>>> addr_long = int(ip_addr, 16)
+>>> hex(addr_long)
+'0x92120289'
+
+> struct.pack("<L", addr_long)
+b'\x89\x02\x12\x92'
+
+
+
+
