@@ -54,6 +54,11 @@ def hex2dec(ip_addr):
 
     return(dec)
 
+def zerohex2dec(num):
+    i = int(num, 16)
+    return(str(i))
+
+
 if __name__ == "__main__":
 
     debug = 1
@@ -82,14 +87,18 @@ if __name__ == "__main__":
         print(x)
         conn_entry = x.split(" ")
         for entry in conn_entry:
+
             san_data = cleandata(entry)
 
-            #print(san_data)
-            try:
-                print(san_data)
-                print(hex2dec(san_data))
-            except:
-                print(san_data)
+            if(san_data[0:4] == "0000"):
+                print(zerohex2dec(san_data))
+            else:
+                #print(san_data)
+                try:
+                    #print(san_data)
+                    print(hex2dec(san_data))
+                except:
+                    print(san_data)
 
         #print(conn_entry[0])
         #print(conn_entry[1])
