@@ -2,10 +2,11 @@
 
 import ipaddress
 import struct
+import sys
 
 """
 greg dunlap / Celtic Cow
-02.29.20
+03.06.20
 
 take output of hex fw conn dump
 
@@ -40,10 +41,6 @@ def cleandata(element):
     if(element[len(element)-1] == ")"):
         element = element.rstrip(")")
 
-    #print("^^^^^^^^^^^^^^^")
-    #print(element)
-    #print("$$$$$$$$$$$$$$$")
-
     return(element)
 
 def hex2dec(ip_addr):
@@ -61,7 +58,7 @@ def zerohex2dec(num):
 
 if __name__ == "__main__":
 
-    debug = 1
+    debug = 0
 
     print("start")
 
@@ -84,22 +81,44 @@ if __name__ == "__main__":
     fw_log = open("test1.txt", "r")
 
     for x in fw_log:
-        print(x)
+        if(debug == 1):
+            print("^^^^^^^^^^^^^^^^^")
+            print(x)
+            print("@@@@@@@@@@@@@@@@@")
+
+        outstring = ""
         conn_entry = x.split(" ")
         for entry in conn_entry:
 
             san_data = cleandata(entry)
 
             if(san_data[0:4] == "0000"):
-                print(zerohex2dec(san_data))
+                if(debug == 1):
+                    print(zerohex2dec(san_data))
+                outstring = outstring + zerohex2dec(san_data) + " "
             else:
                 #print(san_data)
                 try:
-                    #print(san_data)
-                    print(hex2dec(san_data))
-                except:
-                    print(san_data)
-
+                    if(debug == 1):
+                        print(san_data)
+                        print(hex2dec(san_data))
+                        print("ip-me")
+                    outstring = outstring + str(hex2dec(san_data)) + " "
+                except ValueError as e:
+                    if(debug == 1):
+                        print("EXCEPT")
+                        print(san_data)
+                    outstring = outstring + san_data + " "
+                    print(outstring)
+                else:
+                    if(debug == 1):
+                        print("else me")
+                        print(san_data)
+                    outstring = outstring + san_data + " "
+        if(debug == 1):
+            print("-----")
+            print(outstring)
+            print("*****")
         #print(conn_entry[0])
         #print(conn_entry[1])
 
