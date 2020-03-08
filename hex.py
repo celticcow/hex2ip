@@ -109,7 +109,10 @@ if __name__ == "__main__":
                         print("EXCEPT")
                         print(san_data)
                     outstring = outstring + san_data + " "
-                    print(outstring)
+                    export = outstring.split(" ")
+                    #print(outstring)
+                    rule = export[1] + " " + export[3] + " -> " + export[4] + " " + export[6] + " " + export[7] + " : " + export[len(export)-2] 
+                    print(rule)
                 else:
                     if(debug == 1):
                         print("else me")
