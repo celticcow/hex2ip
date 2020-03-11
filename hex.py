@@ -60,8 +60,6 @@ if __name__ == "__main__":
 
     debug = 0
 
-    print("start")
-
     #ip_addr = "FFFFFFFF"
 
     #ip_addr = "92120289"  #146.18.2.137
@@ -78,7 +76,8 @@ if __name__ == "__main__":
 
     #print(ipaddress.IPv4Address(struct.pack(">L", addr_long)))
 
-    fw_log = open("test1.txt", "r")
+    # todo: make argv[1]
+    fw_log = open("wtce2.txt", "r")
 
     for x in fw_log:
         if(debug == 1):
@@ -122,9 +121,6 @@ if __name__ == "__main__":
             print("-----")
             print(outstring)
             print("*****")
-        #print(conn_entry[0])
-        #print(conn_entry[1])
-
 
     fw_log.close()
     #end of main
