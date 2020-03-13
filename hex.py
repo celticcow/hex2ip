@@ -3,10 +3,11 @@
 import ipaddress
 import struct
 import sys
+import argparse
 
 """
 greg dunlap / Celtic Cow
-03.06.20
+03.12.20
 
 take output of hex fw conn dump
 
@@ -14,6 +15,7 @@ fw tab -t connections -u > file.txt
 
 convert from hex IP's to human format
 
+version 0.4
 """
 
 def cleandata(element):
@@ -58,32 +60,37 @@ def zerohex2dec(num):
 
 if __name__ == "__main__":
 
+    parser = argparse.ArgumentParser(description='Checkpoint Hex Conn Table convert to human format')
+    parser.add_argument("-f", required=True, help="name of input file")
+
+    args = parser.parse_args()
+
+    inputfile = args.f 
+
     debug = 0
 
-    #ip_addr = "FFFFFFFF"
-
-    #ip_addr = "92120289"  #146.18.2.137
-    #ip_addr = "0AFF1205"   #10.255.18.5
-
-    #ip_addr = input("What is the HEX IP: ")
-
-    #addr_long = int(ip_addr, 16)
-    #hex(addr_long)
-
-    #struct.pack("<L", addr_long)
-
-    ###  >L vs <L   bad mojo
-
-    #print(ipaddress.IPv4Address(struct.pack(">L", addr_long)))
-
-    # todo: make argv[1]
-    fw_log = open("wtce2.txt", "r")
+    #inputfile = sys.argv[1]
+    #inputfile = "ute-h.txt"
+    fw_log = open(inputfile, "r")
 
     for x in fw_log:
         if(debug == 1):
             print("^^^^^^^^^^^^^^^^^")
             print(x)
             print("@@@@@@@@@@@@@@@@@")
+        
+        """
+        skip sections of header
+        """
+        if("localhost:" in x):
+            continue
+        if("---- connections ----" in x):
+            continue
+        if("dynamic, id 8158" in x):
+            continue
+        if(x == "\n"):
+            #blank line at end of table
+            continue
 
         outstring = ""
         conn_entry = x.split(" ")

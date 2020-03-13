@@ -1,0 +1,12 @@
+takes output file from
+
+fw tab -t connections -u > file1.txt
+
+run as
+
+./hex.py -f file1.txt
+
+this will output the data which we can redirect to file.
+
+todo:
+argparse for options

@@ -39,5 +39,20 @@ b'\x89\x02\x12\x92'
 b'\x89\x02\x12\x92'
 
 
+#ip_addr = "FFFFFFFF"
+
+    #ip_addr = "92120289"  #146.18.2.137
+    #ip_addr = "0AFF1205"   #10.255.18.5
+
+    #ip_addr = input("What is the HEX IP: ")
+
+    #addr_long = int(ip_addr, 16)
+    #hex(addr_long)
+
+    #struct.pack("<L", addr_long)
+
+    ###  >L vs <L   bad mojo
+
+    #print(ipaddress.IPv4Address(struct.pack(">L", addr_long)))
 
 
