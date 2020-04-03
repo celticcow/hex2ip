@@ -57,8 +57,7 @@ def zerohex2dec(num):
     i = int(num, 16)
     return(str(i))
 
-
-if __name__ == "__main__":
+def main():
 
     parser = argparse.ArgumentParser(description='Checkpoint Hex Conn Table convert to human format')
     parser.add_argument("-f", required=True, help="name of input file")
@@ -130,4 +129,6 @@ if __name__ == "__main__":
             print("*****")
 
     fw_log.close()
-    #end of main
+#end of main
+if __name__ == "__main__":
+    main()
